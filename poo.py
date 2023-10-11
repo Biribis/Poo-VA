@@ -3,6 +3,8 @@
 from random import randint
 from datetime import date
 
+#Classe mãe comando de voz genérico
+#Cada comando de voz pode ter mais de uma palavra-chave que o ativa
 class VoiceCommand:
     def __init__(self,name):
         self.name = name
@@ -12,6 +14,7 @@ class VoiceCommand:
     def getKeyword(self)->list:
         return self.keyWord
 
+#Método que adiciona uma palavra-chave nova ao comando
     def addKeyword(self):
         command = input("Adicione a palavra chave: ")
         self.keyWord.append(command)
@@ -19,13 +22,16 @@ class VoiceCommand:
     def getName(self):
         return self.name
 
+#Método que executa a função do comando em si, para um comando genérico só imprime o nome do usuário e o do comando
     def execute(self,person):
         print(f"{person.getName()}\n{self.name.upper()}")
 
+#Classe comando de voz especificado para realizar compras
 class VPurchase(VoiceCommand):
     def __init__(self,name):
         super().__init__(name)
 
+#Método de execução específico que gera números aleatórios para os dados da compra
     def execute(self,person):
         price =randint(1,5001)
         id = randint(10000000,99999999)
@@ -34,7 +40,7 @@ class VPurchase(VoiceCommand):
         new = Document(person, price, id, dat, items)
         person.addHistory(new)
 
-
+#Classe comando de vez específico que mostra o histórico de compras do usuário pelo id da compra
 class VPurchaseHistoric(VoiceCommand):
     def __init__(self,name):
         super().__init__(name)
@@ -42,6 +48,7 @@ class VPurchaseHistoric(VoiceCommand):
     def execute(self, person):
         print(person.purchaseHistory())
 
+#Classe que representa um documento de compra
 class Document:
     def __init__(self, person, value, id, date, numItems):
         self.person = person
@@ -50,12 +57,15 @@ class Document:
         self.date =  date
         self.numItems = numItems
 
+#Método que faz a "impressão completa" de todas as informações da comrpra inclusive do comprador
     def values(self):
         print(f"Comprador: {self.person.getName()} - {self.person.getCPF()}\nPreço total: {self.price}\nID: {self.id}\nData: {self.date}\nNúmero de itens: {self.numItems}")
 
     def getId(self):
         return self.id
 
+#Classe que representa a pessoa que interage com o(a) assistente virtual
+#Na criação de um objeto existe a criação deuma lista em que se temas compras feitas por aquela pessoa em específico
 class Person:
     def __init__(self, name, cpf):
         self.name = name
@@ -68,17 +78,20 @@ class Person:
     def purchaseHistory(self):
         return self.historico
 
+#Método que adiciona o objeto documento gerado após o objeto comando de voz de compra utilizar o método execute()
     def addHistory(self,doc):
         self.historico.append(doc)
 
     def getCPF(self):
         return self.cpf
 
+#Classe controladora: executa todas as interações no mundo criado
 class World:
     def __init__(self):
         self.persons = []
         self.assistants = []
 
+#Método que gera mais pessoas por meio da classe Person, a fim de usuários diferentes interagirem com o(a) assistente virtual
     def genPerson(self):
             nme = input("Qual o nome do usuário? ")
             cpf = int(input("E o CPF? "))
@@ -86,6 +99,7 @@ class World:
             self.persons.append(new)
             return new
 
+#Sempre, no início de cada loop, é feito a impressão de todas as opções de interações entre os objetos
     def Screen(self):
         print("\n\n01 - Gerar assistente Virtual")
         print("02 - Trocar assistente virtual")
@@ -99,28 +113,33 @@ class World:
         print("10 - Ver documento de compra específico")
         print("11 - Finalizar programa")
 
+#Método gera novos(as) assistentes virtuais
     def genVA(self):
         nme = input("Assistant name: ")
         new = VirtualAssistant(nme)
         self.assistants.append(new)
         return new
 
+#Método que verifica todos os(as) assitentes virtuais disponíveis para interação
     def verifyAssist(self):
         for i in range(len(self.assistants)):
             print(f'{i} - {self.assistants[i].getName()}')
 
+#Método que troca a pessoa "ativa"
     def changeUser(self):
         for i in range(len(self.persons)):
             print(f'{i} - {self.persons[i].getName()}')
         user = int(input("Digite o indice du usuário desejado: "))
         return self.persons[user]
 
+#Método que troca o(a) assistente virtual "ativo(a)"
     def changeVA(self):
         for i in range(len(self.assistants)):
             print(f'{i} - {self.assistants[i].getName()}')
         assistant = int(input("Digite o indice du usuário desejado: "))
         return self.assistants[assistant]
 
+#Método que nusca todos os documentos no histórico da pessoa "ativa" e imprime as informações da compra escolhida pelo índice
     def verifyDoc(self,person):
         ll = person.purchaseHistory()
         for i in range(len(ll)):
@@ -129,6 +148,7 @@ class World:
         desejado = ll[docum]
         desejado.values()
 
+#Método que acessa a lista de palavras-cahve de um comando especificado pelo índice, para que o método de adicionar palavras-chave seja executado
     def keyword(self, va):
         va.showCommands()
         key = int(input("Digite o indice do comando a ser atualizado: "))
@@ -136,7 +156,9 @@ class World:
         command = ll[key]
         command.addKeyword()
 
-
+#Método que começa a execução e chama todos os outros métodos
+#Existem, na sua execução, sempre dois objetos básicos iniciais: uma pessoa e um(a) assistente virtual que interagem por meio dos métodos
+#Com a criação de novas pessoas e assistentes vituais se faz necessário sempre guardar quem são os que estão interagindo ou que estão "ativos"
     def run(self):
         vactive = self.genVA()
         active = self.genPerson()
@@ -168,6 +190,9 @@ class World:
             else:
                 print("Essa opção não existe\n\n")
 
+#Classe que representa os(as) assistentes virtuais
+#Em cada um(a) existe uma lista com todos os comandos disponíveis e outra com o histórico de comandos rodados
+#Todos os(as) assistentes virtuais já começam com os comandos de compra e de histórico de compra já cadastrados
 class VirtualAssistant:
     def __init__(self, name):
         self.name = name
@@ -178,18 +203,21 @@ class VirtualAssistant:
         comandInit = VPurchaseHistoric("historico")
         self.commands.append(comandInit)
 
+#Método que adiciona novos comandos de voz genéricos
     def addCommand(self):
         nme = input("Qual o nome do novo comando? ")
         newCom = VoiceCommand(nme)
         self.commands.append(newCom)
         self.endCommand()
 
+#Método que sinaliza o final de cada operação ordenada pelo usuário
     def endCommand(self):
         print("++++++++++++\nTarefa finalizada!!!\n++++++++++++")
 
+#Método que lista todos os comandos disponíveis para aquele(a) asssitente
     def showCommands(self):
         for i in range(len(self.commands)):
-            print(self.commands[i].getName())
+            print(f'{i} - {self.commands[i].getName()}')
 
     def getCommands(self):
         return self.commands
@@ -197,18 +225,25 @@ class VirtualAssistant:
     def getName(self):
         return self.name
 
+#Método que imprime o histórico de comandos chamados naquele(a) assistente
     def history(self):
         print(self.historic)
 
+#Método que recebe uma fala da pessoa "ativa" e o lê a fim de identificar qual comando de voz executar
     def listen(self, person):
         print("Ouvindo... ")
         comando = input()
+        a = 1
         for i in range(len(self.commands)):
             ll = self.commands[i].getKeyword()
-            if comando in ll:
-                self.commands[i].execute(person)
-                self.historic.append(self.commands[i].getName())
-                self.endCommand()
+            for j in range(len(ll)):
+                if ll[j] in comando:
+                    self.commands[i].execute(person)
+                    self.historic.append(self.commands[i].getName())
+                    self.endCommand()
+                    a = 0
+                    break
+            if a == 0:
                 break
 
 if __name__ == '__main__':
