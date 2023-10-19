@@ -1,6 +1,6 @@
 from VoiceCommand import *
 #Classe comando de vez específico que mostra o histórico de compras do usuário pelo id da compra
-class VPurchaseHistoric(VoiceCommand):
+class VCommandHistoric(VoiceCommand):
     def __init__(self,name):
         super().__init__(name)
 

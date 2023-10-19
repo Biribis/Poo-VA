@@ -1,8 +1,9 @@
 from VPurchase import *
-from VPurchaseHitoric import *
+from VCommandHitoric import *
+from VDocuments import *
 #Classe que representa os(as) assistentes virtuais
 #Em cada um(a) existe uma lista com todos os comandos disponíveis e outra com o histórico de comandos rodados
-#Todos os(as) assistentes virtuais já começam com os comandos de compra e de histórico de compra já cadastrados
+#Todos os(as) assistentes virtuais já começam com os comandos de compra, de ver documentos de compra e de histórico de comandos já cadastrados
 class VirtualAssistant:
     def __init__(self, name):
         self.name = name
@@ -10,7 +11,9 @@ class VirtualAssistant:
         self.historic = []
         comandInit = VPurchase("comprar")
         self.commands.append(comandInit)
-        comandInit = VPurchaseHistoric("historico")
+        comandInit = VCommandHistoric("historico")
+        self.commands.append(comandInit)
+        comandInit = VDocuments("documento")
         self.commands.append(comandInit)
 
 #Método que adiciona novos comandos de voz genéricos

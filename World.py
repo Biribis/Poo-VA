@@ -26,8 +26,7 @@ class World:
         print("07 - Adicionar novo comando")
         print("08 - Adicionar nova palavra chave")
         print("09 - Dar um comando")
-        print("10 - Ver documento de compra específico")
-        print("11 - Finalizar programa")
+        print("10 - Finalizar programa")
 
 #Método gera novos(as) assistentes virtuais
     def genVA(self):
@@ -54,15 +53,6 @@ class World:
             print(f'{i} - {self.assistants[i].getName()}')
         assistant = int(input("Digite o indice du usuário desejado: "))
         return self.assistants[assistant]
-
-#Método que nusca todos os documentos no histórico da pessoa "ativa" e imprime as informações da compra escolhida pelo índice
-    def verifyDoc(self,person):
-        ll = person.purchaseHistory()
-        for i in range(len(ll)):
-            print(f'{i} - {ll[i].getId()}')
-        docum = int(input("Escolha o documento a ser revisado pelo índice: "))
-        desejado = ll[docum]
-        desejado.values()
 
 #Método que acessa a lista de palavras-cahve de um comando especificado pelo índice, para que o método de adicionar palavras-chave seja executado
     def keyword(self, va):
@@ -100,8 +90,6 @@ class World:
             elif action == 9:
                 vactive.listen(active)
             elif action == 10:
-                 self.verifyDoc(active)
-            elif action == 11:
                 break
             else:
                 print("Essa opção não existe\n\n")
