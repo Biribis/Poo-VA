@@ -62,6 +62,7 @@ class World:
         ll = va.getCommands()
         command = ll[key]
         command.addKeyword()
+        va.endCommand()
 
 #Método que começa a execução e chama todos os outros métodos
 #Existem, na sua execução, sempre dois objetos básicos iniciais: uma pessoa e um(a) assistente virtual que interagem por meio dos métodos
