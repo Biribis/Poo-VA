@@ -39,12 +39,9 @@ class VirtualAssistant:
     def getName(self):
         return self.name
 
-#Método que imprime o histórico de comandos chamados naquele(a) assistente
+#Método que retorna o histórico de comandos chamados naquele(a) assistente
     def history(self):
-        try:
-            return self.historic
-        finally:
-            self.historic.append('historico')
+        return self.historic
 
 #Método que recebe uma fala da pessoa "ativa" e o lê a fim de identificar qual comando de voz executar
     def listen(self, person,va):
@@ -52,9 +49,9 @@ class VirtualAssistant:
         comando = input()
         a = 1
         for i in range(len(self.commands)):
-            ll = self.commands[i].getKeyword()
-            for j in range(len(ll)):
-                if ll[j] in comando:
+            list = self.commands[i].getKeyword()
+            for j in range(len(list)):
+                if list[j] in comando:
                     self.commands[i].execute(person,va)
                     self.historic.append(self.commands[i].getName())
                     self.endCommand()

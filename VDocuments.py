@@ -5,9 +5,9 @@ class VDocuments(VoiceCommand):
         super().__init__(name)
 
     def execute(self, person,va):
-        ll = person.purchaseHistory()
-        for i in range(len(ll)):
-            print(f'{i} - {ll[i].getId()}')
+        list = person.purchaseHistory()
+        for i in range(len(list)):
+            print(f'{i} - {list[i].getId()}')
         docum = int(input("Escolha o documento a ser revisado pelo índice: "))
-        desejado = ll[docum]
+        desejado = list[docum]
         desejado.values()

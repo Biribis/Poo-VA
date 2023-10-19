@@ -59,8 +59,8 @@ class World:
     def keyword(self, va):
         va.showCommands()
         key = int(input("Digite o indice do comando a ser atualizado: "))
-        ll = va.getCommands()
-        command = ll[key]
+        list = va.getCommands()
+        command = list[key]
         command.addKeyword()
         va.endCommand()
 

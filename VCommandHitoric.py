@@ -5,6 +5,6 @@ class VCommandHistoric(VoiceCommand):
         super().__init__(name)
 
     def execute(self, person,va):
-        ll = va.history()
-        for i in ll:
+        list = va.history()
+        for i in list:
             print(i)
