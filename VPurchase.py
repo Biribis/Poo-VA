@@ -9,7 +9,7 @@ class VPurchase(VoiceCommand):
         super().__init__(name)
 
 #Método de execução específico que gera números aleatórios para os dados da compra
-    def execute(self,person):
+    def execute(self,person,va):
         price =randint(1,5001)
         id = randint(10000000,99999999)
         dat = date.today()

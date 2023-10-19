@@ -88,7 +88,7 @@ class World:
             elif action == 8:
                 self.keyword(vactive)
             elif action == 9:
-                vactive.listen(active)
+                vactive.listen(active,vactive)
             elif action == 10:
                 break
             else:

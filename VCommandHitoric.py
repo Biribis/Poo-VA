@@ -4,5 +4,7 @@ class VCommandHistoric(VoiceCommand):
     def __init__(self,name):
         super().__init__(name)
 
-    def execute(self, person):
-        print(person.purchaseHistory())
+    def execute(self, person,va):
+        ll = va.history()
+        for i in ll:
+            print(i)

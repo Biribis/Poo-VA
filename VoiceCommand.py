@@ -17,6 +17,6 @@ class VoiceCommand:
     def getName(self):
         return self.name
 
-#Método que executa a função do comando em si, para um comando genérico só imprime o nome do usuário e o do comando
-    def execute(self,person):
+#Método que executa a função do comando em si, para um comando de voz genérico só imprime o nome do usuário e o do comando(em caixa alta)
+    def execute(self,person,va):
         print(f"{person.getName()}\n{self.name.upper()}")
