@@ -1,7 +1,7 @@
 from Person import *
 from VirtualAssistant import *
 
-#Classe controladora+mundo: executa todas as interações no mundo criado
+#Classe mundo
 #Neste mundo existem pessoas e assistentes virtuais que interagem por meio de comandos de voz
 class World:
     def __init__(self):

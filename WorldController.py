@@ -1,4 +1,5 @@
 from World import *
+#Classe controladora: executa interações no mundo criado
 class WorldController:
 # Método que começa a execução e chama todos os outros métodos
 # Existem, na sua execução, sempre dois objetos básicos iniciais: uma pessoa e um(a) assistente virtual que interagem por meio dos métodos

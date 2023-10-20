@@ -5,8 +5,9 @@ from VNewCommand import *
 from VNewKey import *
 #Classe que representa os(as) assistentes virtuais
 #Em cada um(a) existe uma lista com todos os comandos disponíveis e outra com o histórico de comandos rodados
-#Todos os(as) assistentes virtuais já começam com os comandos de compra, de ver documentos de compra e de histórico de comandos já cadastrados
-#Por meio das palavras-chave: comprar, documneto e historico, respectivamente
+#Todos os(as) assistentes virtuais já começam com os comandos de compra, de ver documentos de compra, de histórico de comandos acionados,
+#de adicionar novos comandos e de adicionar palavras-chave para a ativação de comandos já existentes
+#Por meio das palavras-chave: comprar, documento, historico, comando e palavra-chave respectivamente
 class VirtualAssistant:
     def __init__(self, name):
         self.name = name

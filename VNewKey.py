@@ -1,5 +1,5 @@
 from VoiceCommand import *
-#Classe comando de vez específico que mostra todos os documentos de compra de um(a) usuário(a)
+#Classe comando de vez específico que adiciona novas palavras-chave para a ativação de um comando específico
 class VNewKey(VoiceCommand):
     def __init__(self,name):
         super().__init__(name)
