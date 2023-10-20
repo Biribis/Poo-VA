@@ -1,6 +1,8 @@
 from VPurchase import *
 from VCommandHitoric import *
 from VDocuments import *
+from VNewCommand import *
+from VNewKey import *
 #Classe que representa os(as) assistentes virtuais
 #Em cada um(a) existe uma lista com todos os comandos disponíveis e outra com o histórico de comandos rodados
 #Todos os(as) assistentes virtuais já começam com os comandos de compra, de ver documentos de compra e de histórico de comandos já cadastrados
@@ -16,13 +18,10 @@ class VirtualAssistant:
         self.commands.append(comandInit)
         comandInit = VDocuments("documento")
         self.commands.append(comandInit)
-
-#Método que adiciona novos comandos de voz genéricos
-    def addCommand(self):
-        nme = input("Qual o nome do novo comando? ")
-        newCom = VoiceCommand(nme)
-        self.commands.append(newCom)
-        self.endCommand()
+        comandInit = VNewCommand("comando")
+        self.commands.append(comandInit)
+        comandInit = VNewKey("palavra-chave")
+        self.commands.append(comandInit)
 
 #Método que sinaliza o final de cada operação ordenada pelo usuário
     def endCommand(self):
