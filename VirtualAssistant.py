@@ -10,19 +10,19 @@ from VNewKey import *
 #Por meio das palavras-chave: comprar, documento, historico, comando e palavra-chave respectivamente
 class VirtualAssistant:
     def __init__(self, name):
-        self.name = name
-        self.commands = []
+        self.__name = name
+        self.__commands = []
         self.historic = []
         comandInit = VPurchase("comprar")
-        self.commands.append(comandInit)
+        self.__commands.append(comandInit)
         comandInit = VCommandHistoric("historico")
-        self.commands.append(comandInit)
+        self.__commands.append(comandInit)
         comandInit = VDocuments("documento")
-        self.commands.append(comandInit)
+        self.__commands.append(comandInit)
         comandInit = VNewCommand("comando")
-        self.commands.append(comandInit)
+        self.__commands.append(comandInit)
         comandInit = VNewKey("palavra-chave")
-        self.commands.append(comandInit)
+        self.__commands.append(comandInit)
 
 #Método que sinaliza o final de cada operação ordenada pelo usuário
     def endCommand(self):
@@ -30,14 +30,14 @@ class VirtualAssistant:
 
 #Método que lista todos os comandos disponíveis para aquele(a) asssitente
     def showCommands(self):
-        for i in range(len(self.commands)):
-            print(f'{i} - {self.commands[i].getName()}')
+        for i in range(len(self.__commands)):
+            print(f'{i} - {self.__commands[i].getName()}')
 
     def getCommands(self):
-        return self.commands
+        return self.__commands
 
     def getName(self):
-        return self.name
+        return self.__name
 
 #Método que retorna o histórico de comandos chamados naquele(a) assistente
     def history(self):
@@ -48,12 +48,12 @@ class VirtualAssistant:
         print("Ouvindo... ")
         comando = input()
         a = 1
-        for i in range(len(self.commands)):
-            list = self.commands[i].getKeyword()
+        for i in range(len(self.__commands)):
+            list = self.__commands[i].getKeyword()
             for j in range(len(list)):
                 if list[j] in comando:
-                    self.commands[i].execute(person,va)
-                    self.historic.append(self.commands[i].getName())
+                    self.__commands[i].execute(person,va)
+                    self.historic.append(self.__commands[i].getName())
                     self.endCommand()
                     a = 0
                     break
